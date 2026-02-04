@@ -8,98 +8,98 @@
 
 @layer base {
   :root {
-    /* Light mode - Clean teal/gray palette */
-    --background: 180 12% 96%;
-    --foreground: 210 11% 15%;
+    /* Light mode - Fresh teal/white palette */
+    --background: 0 0% 100%;
+    --foreground: 220 10% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 11% 15%;
+    --card: 180 25% 98%;
+    --card-foreground: 220 10% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 15%;
+    --popover-foreground: 220 10% 15%;
 
-    /* Primary teal */
+    /* Primary teal - rgb(0, 130, 151) */
     --primary: 187 100% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 180 18% 90%;
-    --secondary-foreground: 210 11% 15%;
+    --secondary: 180 30% 94%;
+    --secondary-foreground: 220 10% 15%;
 
-    --muted: 210 14% 93%;
-    --muted-foreground: 215 10% 45%;
+    --muted: 180 20% 96%;
+    --muted-foreground: 220 8% 46%;
 
-    /* Accent - deeper teal */
+    /* Accent - deeper teal rgb(0, 85, 113) */
     --accent: 197 100% 22%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 4 90% 58%;
+    --destructive: 4 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 14% 89%;
-    --input: 210 14% 89%;
+    --border: 180 15% 90%;
+    --input: 180 15% 90%;
     --ring: 187 100% 30%;
 
     --radius: 0.75rem;
 
     /* Custom Smart Proxy tokens */
     --gradient-primary: linear-gradient(135deg, hsl(187, 100%, 30%) 0%, hsl(197, 100%, 22%) 50%, hsl(200, 100%, 17%) 100%);
-    --gradient-surface: linear-gradient(180deg, hsl(180, 12%, 96%) 0%, hsl(210, 14%, 93%) 100%);
-    --gradient-glow: linear-gradient(135deg, hsl(187, 100%, 30%, 0.2) 0%, hsl(197, 100%, 22%, 0.2) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(180, 25%, 98%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(187, 100%, 30%, 0.15) 0%, hsl(197, 100%, 22%, 0.15) 100%);
     
-    --sidebar-background: 210 14% 95%;
-    --sidebar-foreground: 210 11% 15%;
+    --sidebar-background: 180 20% 97%;
+    --sidebar-foreground: 220 10% 15%;
     --sidebar-primary: 187 100% 30%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 180 18% 90%;
-    --sidebar-accent-foreground: 210 11% 15%;
-    --sidebar-border: 210 14% 89%;
+    --sidebar-accent: 180 30% 94%;
+    --sidebar-accent-foreground: 220 10% 15%;
+    --sidebar-border: 180 15% 90%;
     --sidebar-ring: 187 100% 30%;
   }
 
   .dark {
-    /* Dark mode - Morgan Stanley dark theme */
-    --background: 220 14% 9%;
+    /* Dark mode - Deep charcoal theme rgb(22, 22, 22) base */
+    --background: 0 0% 9%;
     --foreground: 0 0% 100%;
 
-    --card: 220 12% 11%;
+    --card: 220 7% 12%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 220 12% 11%;
+    --popover: 220 7% 14%;
     --popover-foreground: 0 0% 100%;
 
     /* Primary teal */
     --primary: 187 100% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 12% 15%;
+    --secondary: 220 7% 18%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 12% 15%;
-    --muted-foreground: 215 10% 60%;
+    --muted: 220 6% 16%;
+    --muted-foreground: 220 5% 55%;
 
-    /* Accent - deeper teal */
-    --accent: 187 76% 42%;
+    /* Accent - lighter teal for dark mode */
+    --accent: 186 62% 42%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 4 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 12% 18%;
-    --input: 220 12% 18%;
+    --border: 220 6% 20%;
+    --input: 220 6% 20%;
     --ring: 187 100% 30%;
 
     /* Dark mode custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(187, 100%, 30%) 0%, hsl(187, 76%, 42%) 50%, hsl(180, 62%, 55%) 100%);
-    --gradient-surface: linear-gradient(180deg, hsl(220, 14%, 9%) 0%, hsl(220, 12%, 11%) 100%);
-    --gradient-glow: linear-gradient(135deg, hsl(187, 100%, 30%, 0.15) 0%, hsl(187, 76%, 42%, 0.15) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(187, 100%, 30%) 0%, hsl(186, 62%, 42%) 50%, hsl(180, 50%, 50%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(0, 0%, 9%) 0%, hsl(220, 7%, 12%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(187, 100%, 30%, 0.12) 0%, hsl(186, 62%, 42%, 0.12) 100%);
     
-    --sidebar-background: 220 12% 11%;
+    --sidebar-background: 220 7% 11%;
     --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 187 100% 30%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 12% 15%;
+    --sidebar-accent: 220 7% 18%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 220 12% 18%;
+    --sidebar-border: 220 6% 20%;
     --sidebar-ring: 187 100% 30%;
   }
 }
