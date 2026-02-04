@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export function Header() {
   return (
@@ -6,13 +6,19 @@ export function Header() {
       {/* Morgan Stanley Logo */}
       <Link to="/" className="flex items-center gap-2 shrink-0">
         <div className="flex items-center justify-center">
-          <svg 
-            viewBox="0 0 100 24" 
+          <svg
+            viewBox="0 0 100 24"
             className="h-6 w-auto text-foreground"
             fill="currentColor"
           >
-            <text x="0" y="18" fontFamily="Space Grotesk, sans-serif" fontSize="12" fontWeight="600">
-              MORGAN STANLEY
+            <text
+              x="0"
+              y="18"
+              fontFamily="Space Grotesk, sans-serif"
+              fontSize="12"
+              fontWeight="600"
+            >
+              JPMogranChase
             </text>
           </svg>
         </div>
@@ -24,8 +30,8 @@ export function Header() {
       {/* Smart Proxy Logo & Name */}
       <Link to="/" className="flex items-center gap-2">
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-          <svg 
-            viewBox="0 0 24 24" 
+          <svg
+            viewBox="0 0 24 24"
             className="h-5 w-5 text-primary-foreground"
             fill="none"
             stroke="currentColor"
@@ -37,7 +43,7 @@ export function Header() {
           </svg>
         </div>
         <span className="font-display font-semibold text-lg text-foreground">
-          Smart Proxy
+          RDAAS
         </span>
       </Link>
 
