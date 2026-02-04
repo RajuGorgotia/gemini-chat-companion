@@ -4,97 +4,103 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-/* Gemini-inspired dark theme design system */
+/* Morgan Stanley / Smart Proxy Design System */
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 20% 10%;
+    /* Light mode - Clean teal/gray palette */
+    --background: 180 12% 96%;
+    --foreground: 210 11% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card-foreground: 210 11% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 210 11% 15%;
 
-    --primary: 217 91% 60%;
+    /* Primary teal */
+    --primary: 187 100% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 20% 20%;
+    --secondary: 180 18% 90%;
+    --secondary-foreground: 210 11% 15%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 210 14% 93%;
+    --muted-foreground: 215 10% 45%;
 
-    --accent: 262 83% 58%;
+    /* Accent - deeper teal */
+    --accent: 197 100% 22%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 4 90% 58%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 14% 90%;
-    --input: 220 14% 90%;
-    --ring: 217 91% 60%;
+    --border: 210 14% 89%;
+    --input: 210 14% 89%;
+    --ring: 187 100% 30%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Custom Gemini-inspired tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(262, 83%, 58%) 50%, hsl(330, 81%, 60%) 100%);
-    --gradient-surface: linear-gradient(180deg, hsl(220, 20%, 97%) 0%, hsl(220, 14%, 96%) 100%);
-    --gradient-glow: linear-gradient(135deg, hsl(217, 91%, 60%, 0.2) 0%, hsl(262, 83%, 58%, 0.2) 100%);
+    /* Custom Smart Proxy tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(187, 100%, 30%) 0%, hsl(197, 100%, 22%) 50%, hsl(200, 100%, 17%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(180, 12%, 96%) 0%, hsl(210, 14%, 93%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(187, 100%, 30%, 0.2) 0%, hsl(197, 100%, 22%, 0.2) 100%);
     
-    --sidebar-background: 220 14% 96%;
-    --sidebar-foreground: 220 20% 20%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-background: 210 14% 95%;
+    --sidebar-foreground: 210 11% 15%;
+    --sidebar-primary: 187 100% 30%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 14% 92%;
-    --sidebar-accent-foreground: 220 20% 20%;
-    --sidebar-border: 220 14% 90%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 180 18% 90%;
+    --sidebar-accent-foreground: 210 11% 15%;
+    --sidebar-border: 210 14% 89%;
+    --sidebar-ring: 187 100% 30%;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    /* Dark mode - Morgan Stanley dark theme */
+    --background: 220 14% 9%;
+    --foreground: 0 0% 100%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 12% 11%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 12% 11%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 217 91% 60%;
+    /* Primary teal */
+    --primary: 187 100% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 47% 12%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 12% 15%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 222 47% 12%;
-    --muted-foreground: 215 20% 60%;
+    --muted: 220 12% 15%;
+    --muted-foreground: 215 10% 60%;
 
-    --accent: 262 83% 58%;
+    /* Accent - deeper teal */
+    --accent: 187 76% 42%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 50%;
+    --destructive: 4 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 47% 15%;
-    --input: 222 47% 15%;
-    --ring: 217 91% 60%;
+    --border: 220 12% 18%;
+    --input: 220 12% 18%;
+    --ring: 187 100% 30%;
 
     /* Dark mode custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(262, 83%, 58%) 50%, hsl(330, 81%, 60%) 100%);
-    --gradient-surface: linear-gradient(180deg, hsl(222, 47%, 6%) 0%, hsl(222, 47%, 8%) 100%);
-    --gradient-glow: linear-gradient(135deg, hsl(217, 91%, 60%, 0.15) 0%, hsl(262, 83%, 58%, 0.15) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(187, 100%, 30%) 0%, hsl(187, 76%, 42%) 50%, hsl(180, 62%, 55%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(220, 14%, 9%) 0%, hsl(220, 12%, 11%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(187, 100%, 30%, 0.15) 0%, hsl(187, 76%, 42%, 0.15) 100%);
     
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-background: 220 12% 11%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 187 100% 30%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 47% 12%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 47% 15%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 220 12% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 12% 18%;
+    --sidebar-ring: 187 100% 30%;
   }
 }
 
@@ -200,6 +206,16 @@
   @keyframes shimmer {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
+  }
+
+  /* Plugin card styles */
+  .plugin-card {
+    @apply p-3 rounded-lg border border-border bg-card transition-all duration-200 cursor-pointer;
+    @apply hover:border-primary/50;
+  }
+
+  .plugin-card-active {
+    @apply border-primary bg-primary/10;
   }
 }
 

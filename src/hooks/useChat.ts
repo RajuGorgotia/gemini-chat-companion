@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { usePluginSettings } from '@/hooks/usePluginSettings';
 
 export type Message = {
   id: string;
@@ -19,6 +20,7 @@ export function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentConversation, setCurrentConversation] = useState<Conversation | null>(null);
+  const { selectedPlugin } = usePluginSettings();
 
   const createConversation = async (firstMessage: string) => {
     const title = firstMessage.slice(0, 50) + (firstMessage.length > 50 ? '...' : '');
@@ -98,7 +100,10 @@ export function useChat() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ messages: allMessages }),
+        body: JSON.stringify({ 
+          messages: allMessages,
+          systemPrompt: selectedPlugin.systemPrompt,
+        }),
       });
 
       if (!response.ok) {
@@ -173,7 +178,7 @@ export function useChat() {
     } finally {
       setIsLoading(false);
     }
-  }, [messages, currentConversation, isLoading]);
+  }, [messages, currentConversation, isLoading, selectedPlugin]);
 
   const loadConversation = async (conversationId: string) => {
     const { data: conversation } = await supabase
