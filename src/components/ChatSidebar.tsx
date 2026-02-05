@@ -166,11 +166,11 @@ export function ChatSidebar({
             ) : (
               <Button
                 variant="outline"
-                className="w-full justify-start gap-2 bg-sidebar hover:bg-sidebar-accent"
+                className="w-full justify-between gap-2 bg-sidebar hover:bg-sidebar-accent"
                 size="sm"
               >
-                <Settings className="h-4 w-4" />
-                <span className="flex-1 text-left truncate">{selectedPlugin.name}</span>
+                <span className="font-medium text-foreground">{selectedPlugin.name}</span>
+                <Settings className="h-4 w-4 text-muted-foreground" />
               </Button>
             )}
           </PopoverTrigger>
