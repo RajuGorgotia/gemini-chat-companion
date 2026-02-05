@@ -2,8 +2,10 @@ import { Plus, MessageSquare, Trash2, Clock, Settings, ChevronLeft, ChevronRight
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useConversations, GroupedConversations, Conversation } from '@/hooks/useConversations';
 import { usePrompts } from '@/hooks/usePrompts';
+import { PluginSettings } from '@/components/PluginSettings';
 import { cn } from '@/lib/utils';
 
 type ChatSidebarProps = {
@@ -145,6 +147,37 @@ export function ChatSidebar({
         >
           {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
         </Button>
+      </div>
+
+      {/* Settings / Plugin Selector */}
+      <div className="p-3 border-b border-sidebar-border">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              size={collapsed ? "icon" : "sm"}
+              className={cn(
+                "w-full",
+                collapsed ? "" : "justify-start gap-2"
+              )}
+              title="Plugin Settings"
+            >
+              <Settings className="h-4 w-4" />
+              {!collapsed && <span>Settings</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent 
+            side="right" 
+            align="start" 
+            className="w-72 p-3 bg-popover border border-border shadow-lg"
+          >
+            <div className="mb-3">
+              <h4 className="font-medium text-sm">Select Plugin</h4>
+              <p className="text-xs text-muted-foreground">Choose the AI capability mode</p>
+            </div>
+            <PluginSettings collapsed={false} />
+          </PopoverContent>
+        </Popover>
       </div>
 
       {/* Popular Prompts - Only show when not collapsed */}
