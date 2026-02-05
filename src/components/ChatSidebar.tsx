@@ -2,12 +2,10 @@ import { Plus, MessageSquare, Trash2, Clock, Settings, ChevronLeft, ChevronRight
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useConversations, GroupedConversations, Conversation } from '@/hooks/useConversations';
 import { usePrompts } from '@/hooks/usePrompts';
-import { PluginSettings } from '@/components/PluginSettings';
-import { usePluginSettings } from '@/hooks/usePluginSettings';
 import { cn } from '@/lib/utils';
+
 type ChatSidebarProps = {
   currentConversationId?: string;
   onSelectConversation: (id: string) => void;
@@ -101,7 +99,6 @@ export function ChatSidebar({
 }: ChatSidebarProps) {
   const { groupedConversations, deleteConversation } = useConversations();
   const { popularPrompts } = usePrompts();
-  const { selectedPlugin } = usePluginSettings();
 
   const handleDelete = async (id: string) => {
     await deleteConversation(id);
@@ -148,44 +145,6 @@ export function ChatSidebar({
         >
           {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
         </Button>
-      </div>
-
-      {/* Settings / Plugins Section */}
-      <div className="p-3 border-b border-sidebar-border">
-        <Popover>
-          <PopoverTrigger asChild>
-            {collapsed ? (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="w-full"
-                title={`Plugin: ${selectedPlugin.name}`}
-              >
-                <Settings className="h-4 w-4" />
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                className="w-full justify-between gap-2 bg-sidebar hover:bg-sidebar-accent"
-                size="sm"
-              >
-                <span className="font-medium text-foreground">{selectedPlugin.name}</span>
-                <Settings className="h-4 w-4 text-muted-foreground" />
-              </Button>
-            )}
-          </PopoverTrigger>
-          <PopoverContent 
-            side="right" 
-            align="start" 
-            className="w-72 p-3 bg-popover border border-border shadow-lg"
-          >
-            <div className="mb-3">
-              <h4 className="font-medium text-sm">Select Plugin</h4>
-              <p className="text-xs text-muted-foreground">Choose the AI capability mode</p>
-            </div>
-            <PluginSettings collapsed={false} />
-          </PopoverContent>
-        </Popover>
       </div>
 
       {/* Popular Prompts - Only show when not collapsed */}
