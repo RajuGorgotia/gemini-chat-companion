@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
 import { ChatSidebar } from '@/components/ChatSidebar';
 import { ChatArea } from '@/components/ChatArea';
+import { PluginHeader } from '@/components/PluginHeader';
 import { useChat } from '@/hooks/useChat';
 import { useConversations } from '@/hooks/useConversations';
 
@@ -67,6 +68,7 @@ const Index = () => {
 
         {/* Main chat area */}
         <main className="flex-1 flex flex-col overflow-hidden">
+          <PluginHeader />
           <ChatArea
             messages={messages}
             isLoading={isLoading}
