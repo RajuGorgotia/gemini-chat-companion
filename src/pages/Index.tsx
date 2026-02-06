@@ -12,7 +12,7 @@ import { useLocation } from 'react-router-dom';
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const { messages, isLoading, currentConversation, sendMessage, loadConversation, startNewChat } = useChat();
+  const { messages, isLoading, currentConversation, sendMessage, loadConversation, startNewChat, regenerateLastResponse, editAndResend } = useChat();
   const { fetchConversations } = useConversations();
   const location = useLocation();
 
@@ -86,6 +86,8 @@ const Index = () => {
             messages={messages}
             isLoading={isLoading}
             onSendMessage={handleSendMessage}
+            onRegenerate={regenerateLastResponse}
+            onEditAndResend={editAndResend}
           />
         </main>
       </div>
