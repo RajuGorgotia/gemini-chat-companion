@@ -1,19 +1,54 @@
-import { User, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { User, Sparkles, RefreshCw, Copy, ThumbsUp, ThumbsDown, Check, Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import type { Message } from '@/hooks/useChat';
+import { toast } from '@/hooks/use-toast';
 
 type ChatMessageProps = {
   message: Message;
+  onRegenerate?: () => void;
+  onThumbsUp?: () => void;
+  onThumbsDown?: () => void;
+  onEditAndResend?: (newContent: string) => void;
+  isLastAssistant?: boolean;
 };
 
-export function ChatMessage({ message }: ChatMessageProps) {
+export function ChatMessage({ message, onRegenerate, onThumbsUp, onThumbsDown, onEditAndResend, isLastAssistant }: ChatMessageProps) {
   const isUser = message.role === 'user';
+  const [copied, setCopied] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editValue, setEditValue] = useState(message.content);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(message.content);
+    setCopied(true);
+    toast({ title: 'Copied to clipboard' });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleEditSubmit = () => {
+    if (editValue.trim() && editValue !== message.content) {
+      onEditAndResend?.(editValue.trim());
+    }
+    setEditing(false);
+  };
+
+  const handleEditKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleEditSubmit();
+    }
+    if (e.key === 'Escape') {
+      setEditing(false);
+      setEditValue(message.content);
+    }
+  };
 
   return (
     <div 
       className={cn(
-        "flex gap-4 animate-fade-in",
+        "group flex gap-4 animate-fade-in",
         isUser ? "flex-row-reverse" : "flex-row"
       )}
     >
@@ -26,17 +61,66 @@ export function ChatMessage({ message }: ChatMessageProps) {
         {isUser ? <User className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />}
       </div>
       
-      <div className={cn(
-        "max-w-[80%] rounded-2xl px-4 py-3",
-        isUser 
-          ? "bg-primary text-primary-foreground rounded-br-md" 
-          : "bg-secondary text-secondary-foreground rounded-bl-md"
-      )}>
-        {isUser ? (
-          <p className="whitespace-pre-wrap">{message.content}</p>
-        ) : (
-          <div className="prose prose-sm dark:prose-invert max-w-none">
-            <ReactMarkdown>{message.content}</ReactMarkdown>
+      <div className="max-w-[80%] flex flex-col gap-1">
+        <div className={cn(
+          "rounded-2xl px-4 py-3",
+          isUser 
+            ? "bg-primary text-primary-foreground rounded-br-md" 
+            : "bg-secondary text-secondary-foreground rounded-bl-md"
+        )}>
+          {isUser ? (
+            editing ? (
+              <textarea
+                className="w-full bg-transparent border-none outline-none resize-none text-primary-foreground min-h-[1.5em]"
+                value={editValue}
+                onChange={(e) => setEditValue(e.target.value)}
+                onKeyDown={handleEditKeyDown}
+                onBlur={handleEditSubmit}
+                autoFocus
+                rows={Math.max(1, editValue.split('\n').length)}
+              />
+            ) : (
+              <div className="flex items-start gap-2">
+                <p className="whitespace-pre-wrap flex-1">{message.content}</p>
+                {onEditAndResend && (
+                  <button
+                    onClick={() => { setEditing(true); setEditValue(message.content); }}
+                    className="opacity-0 group-hover:opacity-100 shrink-0 mt-0.5 transition-opacity hover:text-primary-foreground/80"
+                    title="Edit message"
+                  >
+                    <Pencil className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
+            )
+          ) : (
+            <div className="prose prose-sm dark:prose-invert max-w-none">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            </div>
+          )}
+        </div>
+
+        {/* Action icons for assistant messages */}
+        {!isUser && message.content && (
+          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-1">
+            {onRegenerate && isLastAssistant && (
+              <button onClick={onRegenerate} className="p-1 rounded hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground" title="Regenerate">
+                <RefreshCw className="h-3.5 w-3.5" />
+              </button>
+            )}
+            <button onClick={handleCopy} className="p-1 rounded hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground" title="Copy">
+              {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+            </button>
+            {onThumbsUp && (
+              <button onClick={onThumbsUp} className="p-1 rounded hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground" title="Good response">
+                <ThumbsUp className="h-3.5 w-3.5" />
+              </button>
+            )}
+            {onThumbsDown && (
+              <button onClick={onThumbsDown} className="p-1 rounded hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground" title="Bad response">
+                <ThumbsDown className="h-3.5 w-3.5" />
+              </button>
+            )}
           </div>
         )}
       </div>
