@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
@@ -7,12 +7,24 @@ import { ChatArea } from '@/components/ChatArea';
 import { PluginHeader } from '@/components/PluginHeader';
 import { useChat } from '@/hooks/useChat';
 import { useConversations } from '@/hooks/useConversations';
+import { useLocation } from 'react-router-dom';
 
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const { messages, isLoading, currentConversation, sendMessage, loadConversation, startNewChat } = useChat();
   const { fetchConversations } = useConversations();
+  const location = useLocation();
+
+  // Handle navigation from Chats page with a conversationId
+  useEffect(() => {
+    const state = location.state as { conversationId?: string } | null;
+    if (state?.conversationId) {
+      loadConversation(state.conversationId);
+      // Clear state so it doesn't reload on re-renders
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   const handleSelectConversation = async (id: string) => {
     await loadConversation(id);
@@ -55,6 +67,7 @@ const Index = () => {
             onNewChat={handleNewChat}
             collapsed={sidebarCollapsed}
             onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+            activeRoute="home"
           />
         </div>
 
