@@ -1,9 +1,30 @@
 import { useState } from 'react';
-import { User, Sparkles, RefreshCw, Copy, ThumbsUp, ThumbsDown, Check, Pencil } from 'lucide-react';
+import { User, Sparkles, RefreshCw, Copy, ThumbsUp, ThumbsDown, Check, Pencil, ChevronRight, ChevronDown, Code } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import type { Message } from '@/hooks/useChat';
 import { toast } from '@/hooks/use-toast';
+
+function CollapsibleSqlBlock({ children }: { children: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="my-2 border border-border rounded-lg overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-2 w-full px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-secondary/50 transition-colors"
+      >
+        {open ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
+        <Code className="h-3.5 w-3.5" />
+        <span>View SQL Query</span>
+      </button>
+      {open && (
+        <pre className="px-4 py-3 bg-muted/50 text-xs overflow-x-auto border-t border-border">
+          <code>{children}</code>
+        </pre>
+      )}
+    </div>
+  );
+}
 
 type ChatMessageProps = {
   message: Message;
@@ -95,7 +116,27 @@ export function ChatMessage({ message, onRegenerate, onThumbsUp, onThumbsDown, o
             )
           ) : (
             <div className="prose prose-sm dark:prose-invert max-w-none">
-              <ReactMarkdown>{message.content}</ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  pre({ children }) {
+                    return <>{children}</>;
+                  },
+                  code({ className, children }) {
+                    const lang = className?.replace('language-', '') || '';
+                    const text = String(children).replace(/\n$/, '');
+                    if (lang === 'sql') {
+                      return <CollapsibleSqlBlock>{text}</CollapsibleSqlBlock>;
+                    }
+                    return (
+                      <pre className="my-2 px-4 py-3 bg-muted/50 text-xs overflow-x-auto rounded-lg border border-border">
+                        <code>{text}</code>
+                      </pre>
+                    );
+                  },
+                }}
+              >
+                {message.content}
+              </ReactMarkdown>
             </div>
           )}
         </div>
