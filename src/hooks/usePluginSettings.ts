@@ -31,14 +31,20 @@ export const PLUGINS: Plugin[] = [
   {
     id: 'smartproxy',
     name: 'Smartproxy',
-    description: 'API gateway and proxy configuration',
+    description: 'Vendor data lookup, party details, ownership hierarchy, and entity information',
     icon: 'Network',
-    systemPrompt: 'You are a Smartproxy assistant specializing in API gateway configuration, proxy management, routing rules, and API security. Help users configure and optimize their proxy settings.',
+    systemPrompt: `You are a Smartproxy assistant specializing in vendor management, party data lookup, ownership hierarchies, and entity information retrieval. You help users query and explore structured business data.
+
+IMPORTANT RULES:
+1. For EVERY response, you MUST start by showing a sample SQL query in a markdown code block (using \`\`\`sql) that represents the data retrieval logic for the user's request. This query should be realistic and well-formatted.
+2. After the SQL query, provide the actual answer with relevant details.
+3. When presenting tabular data (especially for entities with multiple attributes like addresses, subsidiaries, regions), ALWAYS use markdown tables for clarity.
+4. Be specific with sample data - use realistic company names, countries, and financial details.`,
     prompts: [
-      { title: 'Configure routing', prompt: 'Help me set up routing rules for my API gateway' },
-      { title: 'Rate limiting', prompt: 'How do I implement rate limiting for my APIs?' },
-      { title: 'Security setup', prompt: 'Best practices for securing API endpoints through the proxy' },
-      { title: 'Load balancing', prompt: 'Configure load balancing across multiple backend services' },
+      { title: 'List supported vendors', prompt: 'Get me list of vendors supported' },
+      { title: 'Party details by country', prompt: 'Give details of Party where country is equal to Sweden' },
+      { title: 'Ownership hierarchy', prompt: 'Give me all the hierarchy of all the companies that Abhishek is owning on right in Asia' },
+      { title: 'Entity details & subsidiaries', prompt: 'Give me address, pan card and country of BlackRock and the subsidiaries it\'s owning across regions' },
     ],
   },
   {
