@@ -1,9 +1,9 @@
-import { ChevronLeft, ChevronRight, Database, TrendingUp, LayoutDashboard } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Database, TrendingUp, LayoutDashboard, Workflow } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 
-type AdminView = 'all-queries' | 'most-used-queries';
+type AdminView = 'all-queries' | 'most-used-queries' | 'prompt-orchestrator';
 
 type AdminSidebarProps = {
   activeView: AdminView;
@@ -73,6 +73,30 @@ export function AdminSidebar({ activeView, onSelectView, collapsed, onToggleColl
         >
           <TrendingUp className="h-4 w-4 shrink-0" />
           {!collapsed && <span>Most Used Queries</span>}
+        </button>
+      </div>
+
+      {/* Prompt Orchestrator section */}
+      {!collapsed && (
+        <h3 className="px-5 py-1.5 mt-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+          Orchestration
+        </h3>
+      )}
+
+      <div className="px-3 space-y-0.5">
+        <button
+          onClick={() => onSelectView('prompt-orchestrator')}
+          className={cn(
+            'flex items-center gap-3 w-full px-2 py-2 rounded-lg transition-colors text-sm',
+            activeView === 'prompt-orchestrator'
+              ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+              : 'hover:bg-sidebar-accent/50 text-sidebar-foreground',
+            collapsed && 'justify-center'
+          )}
+          title="Prompt Orchestrator"
+        >
+          <Workflow className="h-4 w-4 shrink-0" />
+          {!collapsed && <span>Prompt Orchestrator</span>}
         </button>
       </div>
 
